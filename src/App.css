@@ -26,3 +26,75 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+
+.container{
+  background: white;
+  border-top: 3px solid black;
+  border-right: 12px solid black;
+  width: 400px;
+  height: 247px;
+  padding-left: 15px;
+  margin-top: 20px;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.prueba{
+  background-color: white;
+  color: white;
+  padding-left: 30px;
+  height: 225px;
+  -webkit-box-shadow: -7px 9px 41px -6px rgba(0,0,0,0.41);
+  -moz-box-shadow: -7px 9px 41px -6px rgba(0,0,0,0.41);
+  box-shadow: -7px 9px 41px -6px rgba(0,0,0,0.41);
+}
+
+.name{
+  color: black;
+  text-align: left;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.title{
+  color: black;
+  text-align: left;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.logo{
+  font-size: 30px;
+  text-align: right;
+  width: 100%;
+  padding-top: 25px;
+  padding-bottom: 12px;
+  color: black;
+}
+
+.department{
+  font-family: 'Times New Roman'; 
+  font-style: oblique;
+  text-align: left;
+  color: black;
+}
+
+.address{
+  font-size: 12px;
+  text-align: left;
+  color: black;
+}
+
+.number{
+  font-size: 13px;
+  text-align: left;
+  color: black;
+}
+
+.email{
+  font-size: 11px;
+  text-align: left;
+  color: black;
+}
