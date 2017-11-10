@@ -30,8 +30,6 @@
 
 .container{
   background: white;
-  border-top: 3px solid black;
-  border-right: 12px solid black;
   width: 400px;
   height: 247px;
   padding-left: 15px;
@@ -97,4 +95,17 @@
   font-size: 11px;
   text-align: left;
   color: black;
+}
+
+.save{
+  margin-left: 5px;
+}
+label{
+  font-size: 15px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+input{
+  width: 90px;
 }

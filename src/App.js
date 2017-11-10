@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Form from './FormUser';
+import FormUser from './FormUser';
+import Form from './Form';
 
 class App extends Component {
   render() {
@@ -18,6 +19,8 @@ class App extends Component {
         {/*<Button />*/}
         {/*<List />*/}
         <Form />
+        <br />
+        <FormUser />
       </div>
     );
   }

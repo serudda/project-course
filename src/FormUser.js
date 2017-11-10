@@ -1,12 +1,14 @@
 import * as React from 'react';
 
-class Form extends React.Component{
+class FormUser extends React.Component{
     
     constructor(){
         super();
-        this.state = { users: [], textn: '', textl: '', texte: '', textp: ''};
+        this.state = { users: [], textn: '', textl: '', texte: '', textp: '', textc: '', texta: ''};
         this._handleChangeFirstName = this._handleChangeFirstName.bind(this);
         this._handleChangeLastName = this._handleChangeLastName.bind(this);
+        this._handleChangeCountry = this._handleChangeCountry.bind(this);
+        this._handleChangeAddress = this._handleChangeAddress.bind(this);
         this._handleChangeEmail = this._handleChangeEmail.bind(this);
         this._handleChangePhoneNumber = this._handleChangePhoneNumber.bind(this);
         this._handleClick = this._handleClick.bind(this);
@@ -21,6 +23,18 @@ class Form extends React.Component{
     _handleChangeLastName(event){
         this.setState({
             textl: event.target.value
+        });
+    }
+
+    _handleChangeCountry(event){
+        this.setState({
+            textc: event.target.value
+        });
+    }
+
+    _handleChangeAddress(event){
+        this.setState({
+            texta: event.target.value
         });
     }
 
@@ -41,6 +55,8 @@ class Form extends React.Component{
             id : Date.now(),
             firtsname : this.state.textn,
             lastname: this.state.textl,
+            country: this.state.textc,
+            address: this.state.texta,
             email: this.state.texte,
             phonenumber: this.state.textp
         }
@@ -50,8 +66,10 @@ class Form extends React.Component{
                 users: prevState.users.concat(newUser),
                 textn: '',
                 textl: '',
+                textc: '',
+                texta: '', 
                 texte: '',
-                textp: '',
+                textp: ''
             }
         ));    
     }
@@ -71,6 +89,18 @@ class Form extends React.Component{
                     value = {this.state.textl}>
                 </input>
 
+                <label>Country :</label>
+                <input
+                    onChange = {this._handleChangeCountry}
+                    value = {this.state.textc}>
+                </input>
+
+                <label>Address :</label>
+                <input
+                    onChange = {this._handleChangeAddress}
+                    value = {this.state.texta}>
+                </input>
+
                 <label>Email: </label>
                 <input
                     onChange = {this._handleChangeEmail}
@@ -83,34 +113,34 @@ class Form extends React.Component{
                     value = {this.state.textp}>
                 </input>
 
-                <button onClick = {this._handleClick}>Save!!</button>
+                <button className='save' onClick = {this._handleClick}>Save!!</button>
 
                 <ul>
                     {this.state.users.map(user => (
                         <div className='container'>
-                        <div key={user.id} className='prueba'>
-                            <table>
-                                <tr><td className='logo'>UNCSA</td></tr>
-                               
-                                <tr><td className='name'>{user.firtsname} {user.lastname}</td></tr>
-                               
-                                <tr><td className='title'>FIRST JOB TITLE</td></tr>
-                                    
-                                <tr><td className='title'>SECOND JOB TITLE</td></tr>
-                                    
-                                <tr><td className='department'>Deparment</td></tr>
-                                    
-                                <tr></tr>
-                                    
-                                <tr><td className='address'>1533 South Main Street - Winston-Salem, NC 27101</td></tr>
-                                    
-                                <tr></tr>
+                            <div key={user.id} className='prueba'>
+                                <table>
+                                    <tr><td className='logo'>UNCSA</td></tr>
+                                
+                                    <tr><td className='name'>{user.firtsname} {user.lastname}</td></tr>
+                                
+                                    <tr><td className='title'>FIRST JOB TITLE</td></tr>
+                                        
+                                    <tr><td className='title'>SECOND JOB TITLE</td></tr>
+                                        
+                                    <tr><td className='department'>{user.country}</td></tr>
+                                        
+                                    <tr></tr>
+                                        
+                                    <tr><td className='address'>{user.address}</td></tr>
+                                        
+                                    <tr></tr>
 
-                                <tr><td className='number'>P - {user.phonenumber} / M - {user.phonenumber} / F - {user.phonenumber}</td></tr>
+                                    <tr><td className='number'>P - {user.phonenumber} / M - {user.phonenumber} / F - {user.phonenumber}</td></tr>
 
-                                <tr><td className='email'>{user.email}</td></tr>
-                            </table>
-                        </div>
+                                    <tr><td className='email'>{user.email}</td></tr>
+                                </table>
+                            </div>
                         </div>
                     ))}  
                 </ul>
@@ -119,4 +149,4 @@ class Form extends React.Component{
     }
 }
 
-export default Form;    
+export default FormUser;    
