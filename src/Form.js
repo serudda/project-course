@@ -4,20 +4,19 @@ class Form extends React.Component{
 
     constructor(){
         super();
-        //Inicializar State
         this.state = {text : '' , items: [], textn: '', textl: '', items2: []};
         this._handleChange = this._handleChange.bind(this);
         this._handleClick = this._handleClick.bind(this);
         this._handleChange2 = this._handleChange2.bind(this);
         this._handleChange3 = this._handleChange3.bind(this);
         this._handleClick2 = this._handleClick2.bind(this);
+        this._handleClickClear = this._handleClickClear.bind(this);
     }   
     
     _handleChange(event){
         this.setState({
             text : event.target.value
         });
-   
     }
 
     _handleChange2(event){
@@ -33,7 +32,6 @@ class Form extends React.Component{
     }
      
     _handleClick(){
-        //Creamos una variable objeto con la estructura necesitada
         let newItem = {
             id : Date.now(), 
             text : this.state.text
@@ -62,13 +60,19 @@ class Form extends React.Component{
                 textl: ''
             }
         ));
+    }
 
-        
+    _handleClickClear(){
+        this.setState({
+            items: [],
+            items2: []
+        });
     }
 
     render(){
         return(
             <div>
+                
                 <button
                     onClick = {this._handleClick}
                 >Click Me!</button>
@@ -97,14 +101,19 @@ class Form extends React.Component{
 
                 <button
                     onClick = {this._handleClick2}>
-                    Save!</button>
+                    Save!
+                </button>
 
-                    <ul>
+                <ul>
                     {this.state.items2.map(item => (
                         <li key={item.id}>{item.firstname} {item.lastname}</li>
-                    ))}
-                    
+                    ))}  
                 </ul>
+
+                <button
+                    onClick = {this._handleClickClear}
+                >Clear!</button>
+
             </div>
         );
     }
