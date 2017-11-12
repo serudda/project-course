@@ -26,3 +26,71 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.container {
+  background-color: white;
+  width: 400px;
+  height: 210px;
+  border: 1px solid black;
+  display: inline-block;
+  margin: 10px;
+  padding: 20px 10px 20px 10px;
+  -webkit-box-shadow: -7px 9px 12px -2px rgba(0, 0, 0, 0.33);
+  -moz-box-shadow: -7px 9px 12px -2px rgba(0, 0, 0, 0.33);
+  box-shadow: -7px 9px 12px -2px rgba(0, 0, 0, 0.33);
+}
+
+.container p {
+  margin: 1px;
+  padding-left: 30px;
+  text-align: left;
+}
+
+.logo {
+  font-size: 30px;
+  margin-bottom: 20px;
+  margin-left: 210px;
+}
+
+#name {
+  font-weight: bold;
+  font-size: 14px;
+  padding-top: 15px;
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: 12px;
+}
+
+#country {
+  font-weight: bold;
+  font-style: oblique;
+  font-family: 'Times New Roman';
+}
+
+#address {
+  font-size: 12px;
+}
+
+#phoneNumber {
+  font-size: 13px;
+}
+
+#email {
+  font-size: 11px;
+}
+
+.save{
+  margin-left: 5px;
+}
+
+label{
+  font-size: 15px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+input{
+  width: 90px;
+}
