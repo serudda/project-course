@@ -27,79 +27,64 @@
   to { transform: rotate(360deg); }
 }
 
-
-.container{
-  background: white;
-  width: 400px;
-  height: 247px;
-  padding-left: 15px;
-  margin-top: 20px;
-  display: inline-block;
-  margin-right: 20px;
-}
-
-.prueba{
+.container {
   background-color: white;
-  color: white;
+  width: 400px;
+  height: 210px;
+  border: 1px solid black;
+  display: inline-block;
+  margin: 10px;
+  padding: 20px 10px 20px 10px;
+  -webkit-box-shadow: -7px 9px 12px -2px rgba(0, 0, 0, 0.33);
+  -moz-box-shadow: -7px 9px 12px -2px rgba(0, 0, 0, 0.33);
+  box-shadow: -7px 9px 12px -2px rgba(0, 0, 0, 0.33);
+}
+
+.container p {
+  margin: 1px;
   padding-left: 30px;
-  height: 225px;
-  -webkit-box-shadow: -7px 9px 41px -6px rgba(0,0,0,0.41);
-  -moz-box-shadow: -7px 9px 41px -6px rgba(0,0,0,0.41);
-  box-shadow: -7px 9px 41px -6px rgba(0,0,0,0.41);
-}
-
-.name{
-  color: black;
   text-align: left;
-  font-size: 14px;
-  font-weight: bold;
-  text-transform: uppercase;
 }
 
-.title{
-  color: black;
-  text-align: left;
-  font-size: 12px;
-  text-transform: uppercase;
-}
-
-.logo{
+.logo {
   font-size: 30px;
-  text-align: right;
-  width: 100%;
-  padding-top: 25px;
-  padding-bottom: 12px;
-  color: black;
+  margin-bottom: 20px;
+  margin-left: 210px;
 }
 
-.department{
-  font-family: 'Times New Roman'; 
-  font-style: oblique;
-  text-align: left;
-  color: black;
+#name {
+  font-weight: bold;
+  font-size: 14px;
+  padding-top: 15px;
+  text-transform: uppercase;
 }
 
-.address{
+.title {
   font-size: 12px;
-  text-align: left;
-  color: black;
 }
 
-.number{
+#country {
+  font-weight: bold;
+  font-style: oblique;
+  font-family: 'Times New Roman';
+}
+
+#address {
+  font-size: 12px;
+}
+
+#phoneNumber {
   font-size: 13px;
-  text-align: left;
-  color: black;
 }
 
-.email{
+#email {
   font-size: 11px;
-  text-align: left;
-  color: black;
 }
 
 .save{
   margin-left: 5px;
 }
+
 label{
   font-size: 15px;
   margin-right: 10px;

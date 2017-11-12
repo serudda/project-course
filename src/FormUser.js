@@ -4,7 +4,7 @@ class FormUser extends React.Component{
     
     constructor(){
         super();
-        this.state = { users: [], textn: '', textl: '', texte: '', textp: '', textc: '', texta: ''};
+        this.state = { users: [], nameText: '', lastNameText: '', emailText: '', phoneNumberText: '', countryText: '', addressText: ''};
         this._handleChangeFirstName = this._handleChangeFirstName.bind(this);
         this._handleChangeLastName = this._handleChangeLastName.bind(this);
         this._handleChangeCountry = this._handleChangeCountry.bind(this);
@@ -16,60 +16,60 @@ class FormUser extends React.Component{
 
     _handleChangeFirstName(event){
         this.setState({
-            textn: event.target.value
+            nameText: event.target.value
         });
     }
 
     _handleChangeLastName(event){
         this.setState({
-            textl: event.target.value
+            lastNameText: event.target.value
         });
     }
 
     _handleChangeCountry(event){
         this.setState({
-            textc: event.target.value
+            countryText: event.target.value
         });
     }
 
     _handleChangeAddress(event){
         this.setState({
-            texta: event.target.value
+            addressText: event.target.value
         });
     }
 
     _handleChangeEmail(event){
         this.setState({
-            texte: event.target.value
+            emailText: event.target.value
         });
     }
 
     _handleChangePhoneNumber(event){
         this.setState({
-            textp: event.target.value
+            phoneNumberText: event.target.value
         });
     }
 
     _handleClick(){
         let newUser = {
             id : Date.now(),
-            firtsname : this.state.textn,
-            lastname: this.state.textl,
-            country: this.state.textc,
-            address: this.state.texta,
-            email: this.state.texte,
-            phonenumber: this.state.textp
+            firtsname : this.state.nameText,
+            lastname: this.state.lastNameText,
+            country: this.state.countryText,
+            address: this.state.addressText,
+            email: this.state.emailText,
+            phonenumber: this.state.phoneNumberText
         }
         
         this.setState(prevState => (
             {
                 users: prevState.users.concat(newUser),
-                textn: '',
-                textl: '',
-                textc: '',
-                texta: '', 
-                texte: '',
-                textp: ''
+                nameText: '',
+                lastNameText: '',
+                countryText: '',
+                addressText: '', 
+                emailText: '',
+                phoneNumberText: ''
             }
         ));    
     }
@@ -80,67 +80,54 @@ class FormUser extends React.Component{
                 <label>Firts Name: </label>
                 <input 
                     onChange = {this._handleChangeFirstName}
-                    value = {this.state.textn}>
+                    value = {this.state.nameText}>
                 </input>
 
                 <label>Last Name: </label>
                 <input 
                     onChange = {this._handleChangeLastName}
-                    value = {this.state.textl}>
+                    value = {this.state.lastNameText}>
                 </input>
 
                 <label>Country :</label>
                 <input
                     onChange = {this._handleChangeCountry}
-                    value = {this.state.textc}>
+                    value = {this.state.countryText}>
                 </input>
 
                 <label>Address :</label>
                 <input
                     onChange = {this._handleChangeAddress}
-                    value = {this.state.texta}>
+                    value = {this.state.addressText}>
                 </input>
 
                 <label>Email: </label>
                 <input
                     onChange = {this._handleChangeEmail}
-                    value = {this.state.texte}>
+                    value = {this.state.emailText}>
                 </input>
 
                 <label>Phone Number: </label>
                 <input
                     onChange = {this._handleChangePhoneNumber}
-                    value = {this.state.textp}>
+                    value = {this.state.phoneNumberText}>
                 </input>
 
                 <button className='save' onClick = {this._handleClick}>Save!!</button>
 
                 <ul>
                     {this.state.users.map(user => (
-                        <div className='container'>
-                            <div key={user.id} className='prueba'>
-                                <table>
-                                    <tr><td className='logo'>UNCSA</td></tr>
-                                
-                                    <tr><td className='name'>{user.firtsname} {user.lastname}</td></tr>
-                                
-                                    <tr><td className='title'>FIRST JOB TITLE</td></tr>
-                                        
-                                    <tr><td className='title'>SECOND JOB TITLE</td></tr>
-                                        
-                                    <tr><td className='department'>{user.country}</td></tr>
-                                        
-                                    <tr></tr>
-                                        
-                                    <tr><td className='address'>{user.address}</td></tr>
-                                        
-                                    <tr></tr>
-
-                                    <tr><td className='number'>P - {user.phonenumber} / M - {user.phonenumber} / F - {user.phonenumber}</td></tr>
-
-                                    <tr><td className='email'>{user.email}</td></tr>
-                                </table>
-                            </div>
+                        <div className='container' key={user.id}>
+                            <label className='logo'>UNCSA</label>
+                            <p id='name'>{user.firtsname} {user.lastname}</p>
+                            <p className='title'>FIRST JOB TITLE</p>
+                            <p className='title'>SECOND JOB TITLE</p>
+                            <p id='country'>{user.country}</p>
+                            <br/>
+                            <p id='address'>{user.address}</p>
+                            <br/>
+                            <p id='phoneNumber'>P - {user.phonenumber} / M - {user.phonenumber} / F - {user.phonenumber}</p>
+                            <p id='email'>{user.email}</p>   
                         </div>
                     ))}  
                 </ul>
