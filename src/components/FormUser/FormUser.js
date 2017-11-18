@@ -1,10 +1,20 @@
 import * as React from 'react';
+import BusinessCard from './../BusinessCard/BusinessCard'
+import store from './../../store/store.config';
+
 
 class FormUser extends React.Component{
     
     constructor(){
         super();
-        this.state = { users: [], nameText: '', lastNameText: '', emailText: '', phoneNumberText: '', countryText: '', addressText: '', shown: true};
+        this.state = { users: [], nameText: '', lastNameText: '', emailText: '', phoneNumberText: '', countryText: '', addressText: ''};
+        
+        store.subscribe(() => {
+            this.setState({
+                users: store.getState().users
+            });
+        });
+        
         this._handleChangeFirstName = this._handleChangeFirstName.bind(this);
         this._handleChangeLastName = this._handleChangeLastName.bind(this);
         this._handleChangeCountry = this._handleChangeCountry.bind(this);
@@ -64,17 +74,10 @@ class FormUser extends React.Component{
             phoneNumber: this.state.phoneNumberText
         }
         
-        this.setState(prevState => (
-            {
-                users: prevState.users.concat(newUser),
-                nameText: '',
-                lastNameText: '',
-                countryText: '',
-                addressText: '', 
-                emailText: '',
-                phoneNumberText: ''
-            }
-        ));    
+        store.dispatch ({
+            type: 'ADD_NEW_USER',
+            user: newUser
+        })
     }
 
     _handleClickEdit = (id) => (e) => {
@@ -136,31 +139,16 @@ class FormUser extends React.Component{
         })
     }
 
-    _handleClickDelete = (id) => (e) => {
-        console.log(id);
-        let users = this.state.users;
-        let index = this.state.users.findIndex(user => 
-            user.id === id
-        );
-        console.log(index)
+    _handleClickDelete = (user) => (e) => {
 
-        this.setState({
-            users: users.filter((user,i) =>
-                index !== i
-            )
+        store.dispatch({
+            type : 'DELETE_USER',
+            user
         })
+
       }    
 
     render(){
-        
-        const shown = {
-			display: this.state.shown ? "block" : "none"
-		};
-		
-		const hidden = {
-			display: this.state.shown ? "none" : "block"
-        }
-        
         return(
             <div className='row'>  
                 
@@ -209,33 +197,11 @@ class FormUser extends React.Component{
                 </div>
 
                 {this.state.users.map(user => (
-                <div key={user.id} className='container-ppal'>
-                    <div style={ hidden }  className='columnb'>
-                        <button 
-                        onClick = {this._handleClickSaveEdit(user.id)} >Save Edit!</button>
-                    </div>
-                    
-                    <ul>
-                        <div className='container'>
-                            <button onClick={this._handleClickDelete(user.id)}>x</button>
-                            <button onClick={this._handleClickEdit(user.id)}>Edit</button>    
-                            <div className='logo'>
-                                <span>Stylepills</span>
-                                <img src="http://stylepills.co/static/media/Stylepills-main-short-logo.e188c5a5.svg"
-                                alt='logo'></img>
-                            </div>
-                            <p id='name'>{user.firstName} {user.lastName}</p>
-                            <p className='title'>First Job Title</p>
-                            <p className='title'>Second Job Title</p>
-                            <p id='country'>{user.country}</p>
-                            <br/>
-                            <p id='address'>{user.address}</p>
-                            <br/>
-                            <p id='phoneNumber'>P - {user.phoneNumber} / M - {user.phoneNumber} / F - {user.phoneNumber}</p>
-                            <p id='email'>{user.email}</p> 
-                        </div>             
-                    </ul>
-                </div>
+                    <BusinessCard user={user} 
+                                  onSaveEditClick={this._handleClickSaveEdit} 
+                                  onClickDelete={this._handleClickDelete}
+                                  onClickEdit={this._handleClickEdit}
+                                  key={user.id}/>
                 ))} 
             </div>
         );
