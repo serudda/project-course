@@ -11,17 +11,11 @@ class FormUser extends React.Component{
         this._handleChangeAddress = this._handleChangeAddress.bind(this);
         this._handleChangeEmail = this._handleChangeEmail.bind(this);
         this._handleChangePhoneNumber = this._handleChangePhoneNumber.bind(this);
-        this._handleClick = this._handleClick.bind(this);
+        this._handleClickAdd = this._handleClickAdd.bind(this);
         this._handleClickDelete = this._handleClickDelete.bind(this);
         this._handleClickEdit = this._handleClickEdit.bind(this);
         this._handleClickSaveEdit = this._handleClickSaveEdit.bind(this);
     }
-
-    /*toggle() {
-		this.setState({
-			shown: !this.state.shown
-		});
-	}*/
 
     _handleChangeFirstName(event){
         this.setState({
@@ -59,15 +53,15 @@ class FormUser extends React.Component{
         });
     }
 
-    _handleClick(){
+    _handleClickAdd(){
         let newUser = {
             id : Date.now(),
-            firstname : this.state.nameText,
-            lastname: this.state.lastNameText,
+            firstName : this.state.nameText,
+            lastName: this.state.lastNameText,
             country: this.state.countryText,
             address: this.state.addressText,
             email: this.state.emailText,
-            phonenumber: this.state.phoneNumberText
+            phoneNumber: this.state.phoneNumberText
         }
         
         this.setState(prevState => (
@@ -84,7 +78,7 @@ class FormUser extends React.Component{
     }
 
     _handleClickEdit = (id) => (e) => {
-        console.log(id);
+
         let user = this.state.users.map(function(user) {
             if (user.id === id){
               return user
@@ -94,28 +88,20 @@ class FormUser extends React.Component{
         let index = this.state.users.findIndex(user => 
             user.id === id
         ); 
-
-        console.log(index)
-        console.log(user[index])
         
         this.setState({
 
-            nameText: user[index].firstname,
-            lastNameText: user[index].lastname,
+            nameText: user[index].firstName,
+            lastNameText: user[index].lastName,
             countryText: user[index].country,
             addressText: user[index].address, 
             emailText: user[index].email,
-            phoneNumberText: user[index].phonenumber,
+            phoneNumberText: user[index].phoneNumber,
             shown: !this.state.shown
         })
-
-        return(
-           <button> Take karete take</button>
-        )
     }
       
     _handleClickSaveEdit = (id) => (e) => {
-        console.log(id);
         let user = this.state.users.map(function(user) {
             if (user.id === id){
                 return user
@@ -125,20 +111,17 @@ class FormUser extends React.Component{
         let index = this.state.users.findIndex(user => 
             user.id === id
         ); 
-
-        console.log(index)
-        console.log(user[index])
         
         this.setState({
 
             user: [
                 ...user.slice(0,index),
-                user[index].firstname = this.state.nameText,
-                user[index].lastname = this.state.lastNameText,
+                user[index].firstName = this.state.nameText,
+                user[index].lastName = this.state.lastNameText,
                 user[index].country = this.state.countryText,
                 user[index].address = this.state.addressText,
                 user[index].email = this.state.emailText,
-                user[index].phonenumber = this.state.phoneNumberText,
+                user[index].phoneNumber = this.state.phoneNumberText,
                 ...user.slice(index + 1) 
             ],
             
@@ -169,13 +152,15 @@ class FormUser extends React.Component{
       }    
 
     render(){
-        var shown = {
+        
+        const shown = {
 			display: this.state.shown ? "block" : "none"
 		};
 		
-		var hidden = {
+		const hidden = {
 			display: this.state.shown ? "none" : "block"
-		}
+        }
+        
         return(
             <div className='row'>  
                 
@@ -220,7 +205,7 @@ class FormUser extends React.Component{
                 </div>
 
                 <div className='columnb'>    
-                    <button onClick = {this._handleClick}>Save!!</button>
+                    <button onClick = {this._handleClickAdd}>Save!!</button>
                 </div>
 
                 {this.state.users.map(user => (
@@ -239,19 +224,17 @@ class FormUser extends React.Component{
                                 <img src="http://stylepills.co/static/media/Stylepills-main-short-logo.e188c5a5.svg"
                                 alt='logo'></img>
                             </div>
-                            <p id='name'>{user.firstname} {user.lastname}</p>
+                            <p id='name'>{user.firstName} {user.lastName}</p>
                             <p className='title'>First Job Title</p>
                             <p className='title'>Second Job Title</p>
                             <p id='country'>{user.country}</p>
                             <br/>
                             <p id='address'>{user.address}</p>
                             <br/>
-                            <p id='phoneNumber'>P - {user.phonenumber} / M - {user.phonenumber} / F - {user.phonenumber}</p>
+                            <p id='phoneNumber'>P - {user.phoneNumber} / M - {user.phoneNumber} / F - {user.phoneNumber}</p>
                             <p id='email'>{user.email}</p> 
-                        </div>
-                        
-                     
-                </ul>
+                        </div>             
+                    </ul>
                 </div>
                 ))} 
             </div>
