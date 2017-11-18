@@ -4,40 +4,39 @@ class Form extends React.Component{
 
     constructor(){
         super();
-        this.state = {text : '' , items: [], textn: '', textl: '', items2: []};
-        this._handleChange = this._handleChange.bind(this);
-        this._handleClick = this._handleClick.bind(this);
-        this._handleChange2 = this._handleChange2.bind(this);
-        this._handleChange3 = this._handleChange3.bind(this);
-        this._handleClick2 = this._handleClick2.bind(this);
+        this.state = {text : '' , items: [], textFirstName: '', textLastName: '', items2: []};
+        this._handleChangeText = this._handleChangeText.bind(this);
+        this._handleClickSaveText = this._handleClickSaveText.bind(this);
+        this._handleChangeFirstName = this._handleChangeFirstName.bind(this);
+        this._handleChangeLastName = this._handleChangeLastName.bind(this);
+        this._handleClickSave = this._handleClickSave.bind(this);
         this._handleClickClear = this._handleClickClear.bind(this);
     }   
     
-    _handleChange(event){
+    _handleChangeText(event){
         this.setState({
             text : event.target.value
         });
     }
 
-    _handleChange2(event){
+    _handleChangeFirstName(event){
         this.setState({
-            textn: event.target.value
+            textFirstName: event.target.value
         });
     }
 
-    _handleChange3(event){
+    _handleChangeLastName(event){
         this.setState({
-            textl: event.target.value
+            textLastName: event.target.value
         });
     }
      
-    _handleClick(){
+    _handleClickSaveText(){
         let newItem = {
             id : Date.now(), 
             text : this.state.text
         }
 
-        //Guardar en el estado el objeto
         this.setState(prevState => (
             { 
                 items: prevState.items.concat(newItem),
@@ -46,18 +45,18 @@ class Form extends React.Component{
         ));
     }
 
-    _handleClick2(){
+    _handleClickSave(){
         let newItem = {
             id : Date.now(),
-            firstname : this.state.textn,
-            lastname : this.state.textl
+            firstName : this.state.textFirstName,
+            lastName : this.state.textLastName
         }
 
         this.setState(prevState => (
             {
                 items2: prevState.items2.concat(newItem),
-                textn: '',
-                textl: ''
+                textFirstName: '',
+                textLastName: ''
             }
         ));
     }
@@ -74,11 +73,11 @@ class Form extends React.Component{
             <div>
                 
                 <button
-                    onClick = {this._handleClick}
+                    onClick = {this._handleClickSaveText}
                 >Click Me!</button>
                 
                 <input 
-                    onChange = {this._handleChange}
+                    onChange = {this._handleChangeText}
                     value = {this.state.text}>    
                 </input>
                 
@@ -90,23 +89,23 @@ class Form extends React.Component{
                 </ul>
 
                 <input
-                    onChange = {this._handleChange2}
-                    value = {this.state.textn}>    
+                    onChange = {this._handleChangeFirstName}
+                    value = {this.state.textFirstName}>    
                 </input>
                 
                 <input
-                    onChange = {this._handleChange3}
-                    value = {this.state.textl}>   
+                    onChange = {this._handleChangeLastName}
+                    value = {this.state.textLastName}>   
                 </input>
 
                 <button
-                    onClick = {this._handleClick2}>
+                    onClick = {this._handleClickSave}>
                     Save!
                 </button>
 
                 <ul>
                     {this.state.items2.map(item => (
-                        <li key={item.id}>{item.firstname} {item.lastname}</li>
+                        <li key={item.id}>{item.firstName} {item.lastName}</li>
                     ))}  
                 </ul>
 
