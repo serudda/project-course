@@ -78,6 +78,16 @@ class FormUser extends React.Component{
             type: 'ADD_NEW_USER',
             user: newUser
         })
+
+        this.setState(prevState => (
+            {
+                nameText: '',
+                lastNameText: '',
+                countryText: '',
+                addressText: '',
+                emailText: '',
+                phoneNumberText: ''
+            }));
     }
 
     _handleClickEdit = (id) => (e) => {
