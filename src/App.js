@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import FormUser from './FormUser';
-import Form from './Form';
+import FormUser from './components/FormUser/FormUser';
+import Form from './components/Form/Form';
 
 class App extends Component {
   render() {
