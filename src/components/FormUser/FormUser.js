@@ -7,7 +7,8 @@ class FormUser extends React.Component{
     
     constructor(){
         super();
-        this.state = { users: [], nameText: '', lastNameText: '', emailText: '', phoneNumberText: '', countryText: '', addressText: ''};
+        this.state = { users: [], idText: '', nameText: '', lastNameText: '', emailText: '', phoneNumberText: '', 
+                       countryText: '', addressText: ''};
         
         store.subscribe(() => {
             this.setState({
@@ -21,10 +22,9 @@ class FormUser extends React.Component{
         this._handleChangeAddress = this._handleChangeAddress.bind(this);
         this._handleChangeEmail = this._handleChangeEmail.bind(this);
         this._handleChangePhoneNumber = this._handleChangePhoneNumber.bind(this);
-        this._handleClickAdd = this._handleClickAdd.bind(this);
+        this._handleClickSave = this._handleClickSave.bind(this);
         this._handleClickDelete = this._handleClickDelete.bind(this);
         this._handleClickEdit = this._handleClickEdit.bind(this);
-        this._handleClickSaveEdit = this._handleClickSaveEdit.bind(this);
     }
 
     _handleChangeFirstName(event){
@@ -63,9 +63,10 @@ class FormUser extends React.Component{
         });
     }
 
-    _handleClickAdd(){
+    _handleClickSave(){
+
         let newUser = {
-            id : Date.now(),
+            id : this.state.idText || Date.now(),
             firstName : this.state.nameText,
             lastName: this.state.lastNameText,
             country: this.state.countryText,
@@ -73,14 +74,17 @@ class FormUser extends React.Component{
             email: this.state.emailText,
             phoneNumber: this.state.phoneNumberText
         }
-        
-        store.dispatch ({
-            type: 'ADD_NEW_USER',
-            user: newUser
-        })
 
+        if(this.state.idText === ''){
+
+            store.dispatch ({
+                type: 'ADD_NEW_USER',
+                user: newUser
+            })
+        
         this.setState(prevState => (
             {
+                idText: '',
                 nameText: '',
                 lastNameText: '',
                 countryText: '',
@@ -88,6 +92,24 @@ class FormUser extends React.Component{
                 emailText: '',
                 phoneNumberText: ''
             }));
+        }
+        else{
+            store.dispatch({
+                type : 'UPDATE_USER',
+                user : newUser
+            })
+
+            this.setState(prevState => (
+                {
+                    idText: '',
+                    nameText: '',
+                    lastNameText: '',
+                    countryText: '',
+                    addressText: '',
+                    emailText: '',
+                    phoneNumberText: ''
+                }));
+            } 
     }
 
     _handleClickEdit = (id) => (e) => {
@@ -103,68 +125,33 @@ class FormUser extends React.Component{
         ); 
         
         this.setState({
-
+            idText: id,
             nameText: user[index].firstName,
             lastNameText: user[index].lastName,
             countryText: user[index].country,
             addressText: user[index].address, 
             emailText: user[index].email,
             phoneNumberText: user[index].phoneNumber,
-            shown: !this.state.shown
         })
     }
       
-    _handleClickSaveEdit = (id) => (e) => {
-        let user = this.state.users.map(function(user) {
-            if (user.id === id){
-                return user
-            } 
-        }, this);
-        
-        let index = this.state.users.findIndex(user => 
-            user.id === id
-        ); 
-        
-        this.setState({
-
-            user: [
-                ...user.slice(0,index),
-                user[index].firstName = this.state.nameText,
-                user[index].lastName = this.state.lastNameText,
-                user[index].country = this.state.countryText,
-                user[index].address = this.state.addressText,
-                user[index].email = this.state.emailText,
-                user[index].phoneNumber = this.state.phoneNumberText,
-                ...user.slice(index + 1) 
-            ],
-            
-            nameText: '',
-            lastNameText: '',
-            countryText: '',
-            addressText: '', 
-            emailText: '',
-            phoneNumberText: '',
-            shown: !this.state.shown
-            
-        })
-    }
-
     _handleClickDelete = (user) => (e) => {
-
         store.dispatch({
             type : 'DELETE_USER',
             user
         })
-
       }    
 
     render(){
         return(
             <div className='row'>  
-                
+
                 <div className='column'>
+                    <input type='hidden'
+                        value= {this.state.idText}>
+                    </input>
                     <label>First Name: </label>
-                    <input ref='inputName'
+                    <input
                         onChange = {this._handleChangeFirstName}
                         value = {this.state.nameText}>
                     </input>
@@ -203,7 +190,7 @@ class FormUser extends React.Component{
                 </div>
 
                 <div className='columnb'>    
-                    <button onClick = {this._handleClickAdd}>Save!!</button>
+                    <button onClick = {this._handleClickSave}>Save!!</button>
                 </div>
 
                 {this.state.users.map(user => (
